@@ -11,51 +11,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
     <!-- jQuery 링크 -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <title>삼행시</title>
 
-    <style>
-        .uplayout {
-            width : 98%;
-            height : 50px;
-            border : solid 2px;
-            border-radius : 10px;
-            padding : 0px 5px;
-            margin : 1%;
-        }
-        .belowlayout {
-            width : 98%;
-            height : 120px;
-            border-top: solid 2px;
-            border-left : solid 2px;
-            border-right: solid 2px;
-            background-color : #2E3D59;
-            border-top-left-radius : 10px;
-            border-top-right-radius: 10px;
-            text-align: center;
-            padding : 15px 5px;
-            margin : 1%;
-        }
+    <!-- 스타일시트 링크 -->
+    <link href="{{ url_for('static', filename='layout.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='index.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='mypage.css') }}" rel="stylesheet">
 
-        .dropdown {
-            position : relative;
-            display : inline-block;
-        }
+    <!-- 스크립트 링크 -->
+    <script src="{{ url_for('static', filename='layout.js') }}"></script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <script src="{{ url_for('static', filename='mypage.js') }}"></script>
 
-        .dropdown-content  {
- 			display: none;
-			float : left;
-			background-color: #2E3D59;
-			padding: 3px 8px 0 8px;
-            margin : 0 10px;
-            height : 30px;
-			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            transition: 0.4s;
-        }
+    <title>장원급제</title>
 
-        p { color : #43D9BD; }
-        h1 { font-size: 30px; font-family: 'Yeon Sung', sursive;}
+    {% block pageload %}{% endblock %}
 
         .dropdown:hover .dropdown-content {
             display : block;
@@ -104,10 +73,30 @@
         function OpenPop(){
             $("#PopUp").show();
         }
+
+        function CreateAccount(){
+            let createId = $("#idValue").val();
+            let createPw = $("#pwValue").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/user/create",
+                data: {id_give: createId, pw_give: createPw},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert('입궐하셔도 좋소')
+                        window.location.reload();
+                    } else {
+                        alert('문벌을 사칭하지마시오')
+                    }
+                }
+            })
+        }
     </script>
 </head>
+
 <body>
-    <div style="width : 100%; height:70px; background-color: white; position: fixed">
+<div class="header" style="width : 100%; height:70px; background-color: white; position: fixed">
     <div class="uplayout">
         <div><i class="fas fa-caret-right fa-2x" style="float : left; margin : 8px 8px 0 0"></i></div>
         <div style="display : inline; float : left">
@@ -127,25 +116,27 @@
         <div style="width: 23em; height: 4em">
             <div style="width : 5em; height: 3em; display: block; float: left; padding: 0.6em 0;">문벌</div>
             <div style="width : 16em; height: 3em; display: block; float: left">
-                <input style="width : 100%; height: 100%" placeholder="어디 집안이오">
+                <input style="width : 100%; height: 100%" placeholder="어디 집안이오" id="idValue">
             </div>
         </div>
         <div style="width: 23em; height: 5em">
             <div style="width : 5em; height: 3em; display: block; float: left; padding: 0.6em 0;">호패</div>
             <div style="width : 16em; height: 3em; display: block; float: left">
-                <input style="width : 100%; height: 100%" placeholder="문호를 증명하시오" type="password">
+                <input style="width : 100%; height: 100%" placeholder="문호를 증명하시오" type="password" id="pwValue">
             </div>
         </div>
         <div style="width: 23em; height: 4em">
             <div style="width : 10.5em; display: block; float: left; text-align: center; border : 2px solid">입궐(入闕)</div>
-            <div style="width : 10.5em; display: block; float: left; text-align: center"> 서경(署經) </div>
+            <div style="width : 10.5em; display: block; float: left; text-align: center" onclick="CreateAccount()"> 서경(署經) </div>
         </div>
     </div>
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <div class="belowlayout">
-        <p> Copyright </p>
+    <div style="width: 23em; height: 4em">
+        <div style="width : 10.5em; display: block; float: left; text-align: center; border : 2px solid">입궐(入闕)</div>
+        <div style="width : 10.5em; display: block; float: left; text-align: center"> 서경(署經) </div>
     </div>
+</div>
+<div class="belowlayout">
+    <p> Copyright </p>
+</div>
 </body>
 </html>
