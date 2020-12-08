@@ -104,6 +104,25 @@
         function OpenPop(){
             $("#PopUp").show();
         }
+
+        function CreateAccount(){
+            let createId = $("#idValue").val();
+            let createPw = $("#pwValue").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/user/create",
+                data: {id_give: createId, pw_give: createPw},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert('입궐하셔도 좋소')
+                        window.location.reload();
+                    } else {
+                        alert('문벌을 사칭하지마시오')
+                    }
+                }
+            })           
+        }
     </script>
 </head>
 <body>
@@ -122,23 +141,23 @@
     </div>
     </div>
     <div style="height: 90px"></div>
-    {% block content %}{% end block %}
+    {% block content %}{% endblock %}
     <div id="PopUp">
         <div style="width: 23em; height: 4em">
             <div style="width : 5em; height: 3em; display: block; float: left; padding: 0.6em 0;">문벌</div>
             <div style="width : 16em; height: 3em; display: block; float: left">
-                <input style="width : 100%; height: 100%" placeholder="어디 집안이오">
+                <input style="width : 100%; height: 100%" placeholder="어디 집안이오" id="idValue">
             </div>
         </div>
         <div style="width: 23em; height: 5em">
             <div style="width : 5em; height: 3em; display: block; float: left; padding: 0.6em 0;">호패</div>
             <div style="width : 16em; height: 3em; display: block; float: left">
-                <input style="width : 100%; height: 100%" placeholder="문호를 증명하시오" type="password">
+                <input style="width : 100%; height: 100%" placeholder="문호를 증명하시오" type="password" id="pwValue">
             </div>
         </div>
         <div style="width: 23em; height: 4em">
             <div style="width : 10.5em; display: block; float: left; text-align: center; border : 2px solid">입궐(入闕)</div>
-            <div style="width : 10.5em; display: block; float: left; text-align: center"> 서경(署經) </div>
+            <div style="width : 10.5em; display: block; float: left; text-align: center" onclick="CreateAccount()"> 서경(署經) </div>
         </div>
     </div>
     <br><br><br><br><br><br><br><br><br><br><br>
