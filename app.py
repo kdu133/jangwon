@@ -36,7 +36,7 @@ def create_sam():
     sam = {'first': first_receive, 'second': second_receive,
            'third': third_receive, 'user_id': user_id_receive,
            'date': date, 'like': like
-            }
+           }
 
     db.sam.insert_one(sam)
 
@@ -57,11 +57,23 @@ def delete_sam():
     db.sam.delete_one({'_id': ObjectId(id_receive)})
     return jsonify({'result': 'success'})
 
+
 @app.route('/rank/read', methods=['GET'])
 def read_rank():
     today = datetime.today().strftime("%Y%m%d")
     # ranks = list(db.sam.find({'date': today}).sort({''}))
     return jsonify({'result': 'success'})
+
+@app.route('/user/create', methods=['POST'])
+def create():
+    id_receive = request.form['id_give']
+    pw_receive = request.form['pw_give']
+    value = db.user.find_one({'id': id_receive})
+    if value is None:
+        createOne = {'id': id_receive, 'pw': pw_receive}
+        db.user.insert_one(createOne)
+        return jsonify({'result': 'success'})
+    return jsonify({'result': 'fail'})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
