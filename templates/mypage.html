@@ -1,112 +1,45 @@
-<!Doctype html>
-<html lang="ko">
+{% extends 'layout.html' %}
 
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block pageload %}
+<script>
+    $(document).ready(function () {
+        // $("#my-sam-list").html("");
+        showsams();
+    });
+</script>
+{% endblock %}
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
-
-        <!-- JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous"></script>
-
-        <!-- 구글폰트 -->
-        <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
-
-
-        <title>SW사관학교 정글 | 나홀로 메모장</title>
-
-        <!-- style -->
-        <style type="text/css">
-            * {
-                font-family: "Stylish", sans-serif;
-            }
-
-            .wrap {
-                width: 900px;
-                margin: auto;
-            }
-
-            .comment {
-                color: blue;
-                font-weight: bold;
-            }
-
-            #post-box {
-                width: 500px;
-                margin: 20px auto;
-                padding: 50px;
-                border: black solid;
-                border-radius: 5px;
-            }
-        </style>
-        <script>
-            $(document).ready(function () {
-                $("#cards-box").html("");
-                showsams();
-            });
-
-
-            function showsams() {
-                $.ajax({
-                    type: "GET",
-                    url: "/memo",
-                    data: {},
-                    success: function (response) {
-                        let sams = response["sams"];
-                        console.log(sams);
-                        for (let i = 0; i < sames.length; i++) {
-                            makesam(sams[i]["id"], sams[i]["first"], sams[i]["second"], sams[i]["third"], sams[i]["date"], sams[i]["like"], sams[i]["user_id"]);
-                        }
-                    }
-                })
-            }
-
-            function makesam(id, first, second, third, date, like, user_id) {
-                let tempHtml = `<div className="column">
-                    <div className="box notification is-danger">
+{% block content %}
+<div id="my-sam-list">
+    <div className="column">
+        <div className="box notification is-danger">
                   <span className="title1 has-text-info">
                       <span>삼</span>
                   </span>
-                        <span className="level1 is-size-5">
+            <span className="level1 is-size-5">
                       <span>${first}</span>
                   </span>
-                        <br></br>
-                        <span className="title2 has-text-info">
+            <br></br>
+            <span className="title2 has-text-info">
                       <span>행</span>
                   </span>
-                        <span className="level2 is-size-5">
+            <span className="level2 is-size-5">
                       <span>${second}</span>
                   </span>
-                        <br></br>
-                        <span className="title3 has-text-info">
+            <br></br>
+            <span className="title3 has-text-info">
                       <span>시</span>
                   </span>
-                        <span className="level3 is-size-5">
+            <span className="level3 is-size-5">
                       <span>${third}</span>
                   </span>
-                        <br></br>
-                        <span className="level-item">
+            <br></br>
+            <span className="level-item">
                     <span className="icon is-small"><i className="fas fa-heart"></i></span>
                   </span>
-                        <div className="level-right is-size-4">
-                            ${date}
-                        </div></div>`;
-                $("#cards-box").append(tempHtml);
-
-            }
-        </script>
-
-    </head>
-
-    <body>
-
-    </body>
-
-</html>
+            <div className="level-right is-size-4">
+                ${date}
+            </div>
+        </div>
+    </div>
+    {% endblock %}

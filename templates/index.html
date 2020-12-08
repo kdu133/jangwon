@@ -1,10 +1,10 @@
 {% extends 'layout.html' %}
 
-{% block reload %}
+{% block pageload %}
     <script>
         $(document).ready(function(){
             readSam();
-
+            showRank();
         });
     </script>
 {% endblock %}

@@ -19,6 +19,10 @@ jwt = JWTManager(app)
 def home():
     return render_template('index.html')
 
+@app.route('/myPage')
+def myPage():
+    return render_template('mypage.html')
+
 # 삼행시 CRUD API
 @app.route('/sam/create', methods=['POST'])
 def create_sam():
@@ -48,9 +52,15 @@ def read_sam():
     return jsonify({'result': 'success', 'sam_list': sams})
 
 @app.route('/sam/delete', methods=['POST'])
-def delete_content():
+def delete_sam():
     id_receive = request.form['id_give']
     db.sam.delete_one({'_id': ObjectId(id_receive)})
+    return jsonify({'result': 'success'})
+
+@app.route('/rank/read', methods=['GET'])
+def read_rank():
+    today = datetime.today().strftime("%Y%m%d")
+    # ranks = list(db.sam.find({'date': today}).sort({''}))
     return jsonify({'result': 'success'})
 
 if __name__ == '__main__':

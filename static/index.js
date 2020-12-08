@@ -1,3 +1,5 @@
+
+
 // index.html 관련 함수
 
 function showSamAddCard() {
@@ -103,59 +105,40 @@ function makeSamCard(sam){
 }
 
 function deleteSam(id) {
-   $.ajax({
-      type: "POST",
-      url: "/content/delete",
-      data: {
-          id_give : id,
-          user_id_give : "user_id"
-      },
-      success: function (response) {
-         if (response["result"] == "success") {
-            alert("삼행시 삭제!");
-            window.location.reload();
-         } else {
-            alert("서버 오류!")
-         }
-      }
-   })
-}
-
-
-// 회원가입 함수
-
-function signup() {
-    let id = $('#id').val();
-    let pwd = $('#pwd').val();
-
     $.ajax({
-        type: 'POST',
-        url: '/signup',
-        data: {'id': id, 'pwd': pwd},
+        type: "POST",
+        url: "/sam/delete",
+        data: {
+            id_give : id,
+            user_id_give : "user_id"
+        },
         success: function (response) {
-            alert(response['msg']);
-            if (response['ok']){
-                window.location.href = '/';
+            if (response["result"] == "success") {
+                alert("삼행시 삭제!");
+                window.location.reload();
+            } else {
+                alert("서버 오류!")
             }
         }
     })
 }
 
-// 로그인 함수
-
-function login() {
-    let id = $('#id').val();
-    let pwd = $('#pwd').val();
-
+function showRank(){
     $.ajax({
-        type: 'POST',
-        url: '/login',
-        data: {'id': id, 'pwd': pwd},
+        type: "GET",
+        url: "/rank/read",
+        data: {
+        },
         success: function (response) {
-            if (response['ok']){
-                window.location.href = response['next'];
+            if (response['result'] == 'success') {
+                let sams = response['sam_list']
+                for (let i = sams.length-1; i >= 0; i--) {
+                    let sam = sams[i]
+                    $('#sam-list').append(makeSamCard(sam))
+                }
+
             } else {
-                alert(response['msg']);
+                alert("서버 오류!")
             }
         }
     })
