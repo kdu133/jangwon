@@ -1,5 +1,4 @@
 from pymongo import MongoClient
-from flask_jwt_extended import JWTManager
 from flask import Flask, render_template, jsonify, request, session
 import bcrypt
 from datetime import datetime
@@ -8,11 +7,8 @@ from bson.objectid import ObjectId
 client = MongoClient('localhost', 27017)
 # client = MongoClient('mongodb://test:test@localhost', 27017)
 db = client.jangwon
-
 app = Flask(__name__)
-
-app.config['JWT_SECRET_KEY'] = 'secretsecret'
-jwt = JWTManager(app)
+app.secret_key = "secretsecret"
 
 # HTML 화면 보여주기
 @app.route('/')
@@ -74,6 +70,29 @@ def create():
         db.user.insert_one(createOne)
         return jsonify({'result': 'success'})
     return jsonify({'result': 'fail'})
+
+@app.route('/user/login', methods=['POST'])
+def login_user():
+    id_receive = request.form['id_give']
+    pw_receive = request.form['pw_give']
+    user = db.user.find_one({'id': id_receive})
+    if user is None or user['pw'] != pw_receive:
+        return jsonify({'result': 'fail'})
+    session['id'] = user['id']
+    return jsonify({'result': 'success'})
+
+@app.route('/user/logout', methods=['GET'])
+def logout_user():
+    session.clear()
+    return jsonify({'result': 'success'})
+
+@app.route('/idcheck', methods=["GET"])
+def user_only():
+    if 'id' in session:
+        id = session['id']
+    else:
+        id = '없음'
+    return jsonify({'result': 'success', 'id': id})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

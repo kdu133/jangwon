@@ -132,11 +132,10 @@ function showRank(){
         success: function (response) {
             if (response['result'] == 'success') {
                 let sams = response['sam_list']
-                for (let i = sams.length-1; i >= 0; i--) {
-                    let sam = sams[i]
-                    $('#sam-list').append(makeSamCard(sam))
-                }
-
+                // for (let i = sams.length-1; i >= 0; i--) {
+                //     let sam = sams[i]
+                //     $('#sam-list').append(makeSamCard(sam))
+                // }
             } else {
                 alert("서버 오류!")
             }
