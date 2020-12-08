@@ -1,0 +1,141 @@
+.rank-box{
+    width: 180px;
+    height: 150px;
+    position: fixed;
+    right: 1%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    /*z-index: 2;*/
+}
+
+.sam-column{
+    width: 80%;
+    margin: auto;
+}
+
+.sam-text{
+    float:left;
+    width: 90%;
+}
+
+#sam-add-card{
+    display: none;
+}
+
+#sam-add-card input{
+    width: 40%;
+}
+
+.sam-add-button{
+    text-align: center;
+}
+
+
+
+
+
+
+/* wrapper */
+.wrapper{
+    font-family: 'Noto Sans KR', sans-serif;
+    justify-content: center;
+}
+
+
+/* header */
+
+header{
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    background-color: #fff;
+    /*임시*/
+    border: solid 1px;
+}
+
+
+.navbar{
+    /*border: solid 1px;*/
+    height: 4rem;
+    width: 80%;
+    padding: 0.5rem 2rem;
+    margin: 0rem auto;
+}
+
+.navbar-brand{
+    font-family: 'Single Day', cursive;
+    font-size: xx-large;
+    text-align: start;
+}
+
+.navbar-brand .navbar-item{
+    padding-top: 0rem;
+}
+
+.navbar-brand .navbar-item span{
+    vertical-align: top;
+}
+
+.pointer{
+    cursor:pointer;
+}
+
+
+/* main */
+
+main{
+    width: 80%;
+    margin: 0rem auto;
+    padding: 8rem 2rem;
+}
+
+.main-image{
+    margin: 0rem auto;
+    width: 70%;
+}
+
+.layer-popup{
+    display: none;
+    position: fixed;
+    height: 21rem;
+    width: 30em;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    margin-bottom: 0rem;
+}
+
+.content-add{
+    text-align: center;
+    padding-top: 1.5rem;
+}
+
+.content-box{
+    height: 20rem;
+    width: 70em;
+    top: 70%;
+}
+
+#novel-content{
+    height: 12rem;
+}
+
+.message{
+    position: relative;
+}
+
+.content-edit{
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+}
+
+/* footer */
+
+footer{
+    align-items: center;
+}
+
+
+
