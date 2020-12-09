@@ -1,7 +1,8 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, DESCENDING, ASCENDING
 from flask import Flask, render_template, jsonify, request, session
 import bcrypt
 from datetime import datetime
+import time
 from bson.objectid import ObjectId
 
 client = MongoClient('localhost', 27017)
@@ -22,21 +23,30 @@ def myPage():
 # 삼행시 CRUD API
 @app.route('/sam/create', methods=['POST'])
 def create_sam():
-    first_receive = request.form['first_give']
-    second_receive = request.form['second_give']
-    third_receive = request.form['third_give']
-    user_id_receive = request.form['user_id_give']
-    date = datetime.today().strftime("%Y%m%d")
-    like = []
+    if 'id' not in session:
+        message = "입궐 먼저 하시오"
+    else:
+        user_id = session['id']
+        # 날짜
+        sam_check = db.sam.find_one({'user_id':user_id})
+        if sam_check is not None:
+            message = "이미 쓰셨잖소"
+        else:
+            first_receive = request.form['first_give']
+            second_receive = request.form['second_give']
+            third_receive = request.form['third_give']
+            date = datetime.today().strftime("%Y%m%d")
+            now = time.strftime("%H%M%S")
 
-    sam = {'first': first_receive, 'second': second_receive,
-           'third': third_receive, 'user_id': user_id_receive,
-           'date': date, 'like': like
-           }
+            sam = {'first': first_receive, 'second': second_receive,
+                   'third': third_receive, 'user_id': user_id,
+                   'date': date, 'time': now, 'like_list': [], 'like_cnt': 0
+                   }
 
-    db.sam.insert_one(sam)
+            db.sam.insert_one(sam)
+            message = "삼행시 추가!"
 
-    return jsonify({'result': 'success'})
+    return jsonify({'result': 'success', 'message':message})
 
 @app.route('/sam/read', methods=['GET'])
 def read_sam():
@@ -53,14 +63,43 @@ def delete_sam():
     db.sam.delete_one({'_id': ObjectId(id_receive)})
     return jsonify({'result': 'success'})
 
+@app.route('/sam/like', methods=['POST'])
+def like_sam():
+    if 'id' not in session:
+        message = "입궐 먼저 하시오"
+    else:
+        id_receive = request.form['id_give']
+        user_id = session['id']
+        sam = db.sam.find_one({'_id': ObjectId(id_receive)})
+        print(user_id, sam)
+        if user_id in sam['like_list']:
+            message = "좋아요 취소"
+            like_status = "likeDown"
+            like_list = sam['like_list']
+            like_list.remove(user_id)
+            db.sam.update_one({'_id': ObjectId(id_receive)},
+                              {'$set': {'like_list': like_list,
+                                        'like_cnt': sam['like_cnt'] - 1}})
+        else:
+            message = "좋아요"
+            like_status = "likeUp"
+            like_list = sam['like_list']
+            like_list.append(user_id)
+            db.sam.update_one({'_id': ObjectId(id_receive)},
+                              {'$set': {'like_list': like_list,
+                                        'like_cnt': sam['like_cnt'] + 1}})
+        print(message)
+    return jsonify({'result': 'success', 'message': message,
+                    'like_status': like_status})
 
 @app.route('/rank/read', methods=['GET'])
 def read_rank():
     today = datetime.today().strftime("%Y%m%d")
-    ranks = list(db.sam.find({'date': today}))
-    print(ranks)
-    print(sorted(ranks, key=lambda x: -len(x['like'])))
-    return jsonify({'result': 'success'})
+    ranks = list(db.sam.find({'date': today}).sort([("like_cnt", DESCENDING),("time", ASCENDING)]).limit(3))
+    ranks = list(map(lambda x:x['user_id'], ranks))
+    while len(ranks) < 2:
+        ranks.append("")
+    return jsonify({'result': 'success', 'ranks': ranks})
 
 @app.route('/user/create', methods=['POST'])
 def create():
