@@ -15,6 +15,30 @@
             readSam();
             showRank();
             Notlogin();
+            $('#goLogin').hover(function() {
+                $('#chat').show();
+                $('#wannalogin').show();
+            }, function() {
+                $('#chat').hide();
+                $('#wannalogin').hide();
+            })
+
+            $('#goSet').hover(function() {
+                $('#chat').show();
+                $('#wannaSet').show();
+            }, function() {
+                $('#chat').hide();
+                $('#wannaSet').hide();
+            })
+
+
+            $('#justSee').hover(function() {
+                $('#chat').show();
+                $('#wannaSee').show();
+            }, function() {
+                $('#chat').hide();
+                $('#wannaSee').hide();
+            })
         });
     </script>
 {% endif %}
@@ -23,11 +47,11 @@
 
 {% block content %}
 <div class="card rank-box">
-    <div class="card-header">금의환향</div>
+    <div class="card-header">방목(榜目)</div>
     <div class="card-content">
         <p> 장원 : <span id="rank-1"></span></p>
-        <p> 2등 : <span id="rank-2"></span></p>
-        <p> 3등 : <span id="rank-3"></span></p>
+        <p> 급제 : <span id="rank-2"></span></p>
+        <p> 급제 : <span id="rank-3"></span></p>
     </div>
 </div>
 
@@ -35,7 +59,7 @@
     <div class="card">
         <div class="card-content">
             <p class="title">
-                오늘의 키워드는 "코로나" 입니다!
+                금일 시제(試題)는 "코로나"
             </p>
         </div>
     </div>

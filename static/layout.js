@@ -67,7 +67,7 @@ function Logout(){
         success: function (response) {
             if (response["result"] == "success") {
 ;               alert('잘가시오')
-                window.location.reload();
+                location.href='/';
             } else {
                 alert('오류')
             }
@@ -89,4 +89,9 @@ function PopupID(){
             }
         }
     })
+}
+
+function Popdown(){
+    $("#PopUp").hide();
+    $("#pozol").hide();
 }

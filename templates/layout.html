@@ -33,6 +33,7 @@
             border-radius : 10px;
             padding : 0px 5px;
             margin : 1%;
+            z-index: 1;
         }
         .belowlayout {
             width : 98%;
@@ -58,7 +59,7 @@
             float : left;
             background-color: #2E3D59;
             padding: 3px 8px 0 8px;
-            margin : 0 10px;
+            margin : 0 3px;
             height : 30px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             transition: 0.4s;
@@ -70,6 +71,9 @@
         .dropdown:hover .dropdown-content {
             display : block;
         }
+        .dropdown:hover #logout {
+            display : none;
+        }
 
         #PopUp{
             position : fixed;
@@ -80,6 +84,26 @@
             margin-left: -15em;
             margin-top: -5%;
             padding: 4em;
+        }
+
+        #pozol{
+            position : relative;
+            width : 16em;
+            height : 16em;
+            display : none;
+            top: -14em; left : 75%;
+            background-image: url("../static/pozol.png");
+            background-size: cover;
+        }
+
+        #chat{
+            position : relative;
+            width : 17em;
+            height : 2.2em;
+            display : none;
+            top: -16em; left : 0%;
+            background-image: url("../static/chat.png");
+            background-size: cover;
         }
 
         #flag {
@@ -106,11 +130,15 @@
             border-left: 55px solid transparent;
             border-right: 55px solid transparent;
         }
+
     </style>
 
     <script>
+
+
         function OpenPop(){
             $("#PopUp").show();
+            $("#pozol").show();
         }
 
         function CreateAccount(){
@@ -141,10 +169,11 @@
                     if (response["result"] == "success") {
                         let loginId = response["id"]
                         let loginhtml = `
-                    <div class="dropdown" style="float : right; margin : 8px 10px 0 0">
+            <i onclick="Logout()" id="logout" class="fas fa-door-open fa-2x pointer" style="margin : 8px 0 0 0; float: right"></i>
+                    <div class="dropdown" style="float : right; margin : 8px 8px 0 0">
             <i class="fas fa-scroll fa-2x pointer" onclick="location.href='myPage'"></i>
             <div class="dropdown-content">
-                <p>${loginId}</p>
+                <p>${loginId}의 시권(試券)</p>
             </div>
         </div>`
                         $("#iflogin").append(loginhtml);
@@ -160,7 +189,7 @@
     </script>
 </head>
 <body>
-<div style="width : 100%; height:70px; background-color: white; position: fixed">
+<div style="width : 100%; height:70px; background-color: white; position: fixed; z-index: 1;">
     <div class="uplayout">
         <div><i class="fas fa-caret-right fa-2x" style="float : left; margin : 8px 8px 0 0"></i></div>
         <div style="display : inline; float : left">
@@ -171,7 +200,7 @@
         <div id="logbtn" class="dropdown" style="dispaly : none; float : right; margin : 8px 10px 0 0">
             <i class="fas fa-user-circle fa-2x" onclick="OpenPop()"></i>
             <div class="dropdown-content">
-                <p>Sign in</p>
+                <p>과거보러 오셨소?</p>
             </div>
         </div>
     </div>
@@ -191,18 +220,25 @@
             <input style="width : 100%; height: 100%" placeholder="문호를 증명하시오" type="password" id="pwValue">
         </div>
     </div>
-    <div style="width: 23em; height: 4em">
-        <div style="width : 10.5em; display: block; float: left; text-align: center; border : 2px solid" onclick="Login()">입궐(入闕)</div>
-        <div style="width : 10.5em; display: block; float: left; text-align: center" onclick="CreateAccount()"> 서경(署經) </div>
+    <div style="width: 23em; padding-left: 1.5em; height: 4em;">
+        <div id="goLogin" style="width : 7em; display: block; float: left; text-align: center; border : 2px solid" onclick="Login()">입궐(入闕)</div>
+        <div id="goSet" style="width : 7em; display: block; float: left; text-align: center" onclick="CreateAccount()"> 서경(署經) </div>
+    </div>
+    <div id="pozol" style="z-index: 1;"></div>
+    <div id="justSee" style="position: relative; top: -20em; left : 70%;  width : 7em; display: block; z-index: 3; float: left; text-align: center" onclick="Popdown()">
+        방관(傍觀) </div>
+    <div id="chat" style="display: none">
+        <h1 id="wannalogin" style="display: none; position:relative; left : -2.5em;">들어오시겠소?</h1>
+        <h1 id="wannaSet" style="display: none; position:relative; left : -2em;">처음이시오?</h1>
+        <h1 id="wannaSee" style="display: none; position:relative; left : -3em;">돌아가시겠소?</h1>
     </div>
 </div>
+
 <br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <div class="belowlayout">
-    <p> Copyright </p>
-    <button onclick="Logout()">logout</button>
-    <button onclick="PopupID()">id</button>
+    <p> 저작권 : 무른모 사관학교 '밀림' 여덟번째 조 </p>
 </div>
 </body>
 </html>
