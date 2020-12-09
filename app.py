@@ -93,6 +93,7 @@ def delete_sam():
 def like_sam():
     if 'id' not in session:
         message = "입궐 먼저 하시오"
+        like_status = "likeNone"
     else:
         id_receive = request.form['id_give']
         user_id = session['id']

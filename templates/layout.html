@@ -29,12 +29,13 @@
     <style>
         .uplayout {
             width : 98%;
-            height : 50px;
+            height : 70px;
             border : solid 2px;
             border-radius : 10px;
-            padding : 0px 5px;
+            padding : 0px 0 0 43%;
             margin : 1%;
             z-index: 1;
+            background-color: white;
         }
         .belowlayout {
             width : 98%;
@@ -68,6 +69,7 @@
 
         p { color : #43D9BD; }
         h1 { font-size: 30px; font-family: 'Yeon Sung', sursive;}
+        h2 { font-size: 50px; font-family: 'Yeon Sung', sursive;}
 
         .dropdown:hover .dropdown-content {
             display : block;
@@ -171,13 +173,13 @@
         }
     </script>
 </head>
-<body>
-<div style="width : 100%; height:70px; background-color: white; position: fixed; z-index: 1;">
+<body style="background-image:url(../static/back.png)">
+<div style="width : 100%; height:70px; position: fixed; top: 13px; z-index: 1;">
     <div class="uplayout">
-        <div><i class="fas fa-caret-right fa-2x" style="float : left; margin : 8px 8px 0 0"></i></div>
         <div style="display : inline; float : left">
-            <h1 class="pointer" onclick="location.href='/'">장원급제</h1>
+            <h2 style="" class="pointer" onclick="location.href='/'">장원급제</h2>
         </div>
+        <div style="display : inline; width : 3.5em; height : 5em; transform:translate(-7px, -15px); background-image:url(../static/write.png); float : left; background-size : cover; "></div>
         <div id="iflogin">
         </div>
         <div id="logbtn" class="dropdown" style="dispaly : none; float : right; margin : 8px 10px 0 0">
