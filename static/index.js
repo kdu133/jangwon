@@ -3,6 +3,7 @@
 // index.html 관련 함수
 
 function showSamAddCard() {
+    $(".layer-popup").hide();
     $('#sam-add-card').show();
 }
 
@@ -188,9 +189,9 @@ function getKeyword(date){
 function setKeyword(){
     let keyword = getKeyword(getToday())
     console.log(keyword)
-    $('#keyword-first').text(keyword[0] + " :")
-    $('#keyword-second').text(keyword[1] + " :")
-    $('#keyword-third').text(keyword[2] + " :")
+    $('#keyword-first').text(keyword[0] + " : ")
+    $('#keyword-second').text(keyword[1] + " : ")
+    $('#keyword-third').text(keyword[2] + " : ")
     $('#keyword').text(keyword)
 }
 
