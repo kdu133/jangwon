@@ -1,19 +1,21 @@
 function showsams() {
     $.ajax({
         type: "GET",
-        url: "/sam/read",
+        url: "/sam/myread",
         data: {},
         success: function (response) {
-            let sams = response["sam_list"];
-            console.log(sams);
-            for (let i=0; i<sams.length; i++) {
-                makesam(sams[i]["id"], sams[i]["first"], sams[i]["second"], sams[i]["third"], sams[i]["date"], sams[i]["like"], sams[i]["user_id"]);
+            let mysams = response["mysam_list"];
+            console.log(mysams);
+            for (let i=0; i<mysams.length; i++) {
+                print(mysams[i])
+                makesam(mysams[i]["id"], mysams[i]["first"], mysams[i]["second"], mysams[i]["third"], mysams[i]["date"], mysams[i]["like_cnt"], mysams[i]["user_id"]);
             }
         }
     })
 }
 
-function makesam(id, first, second, third, date, like, user_id) {
+function makesam(id, first, second, third, date, like_cnt) {
+
     let tempHtml = `<div className="column">
                     <div className="box notification is-danger">
                   <span className="title1 has-text-info">
@@ -39,9 +41,9 @@ function makesam(id, first, second, third, date, like, user_id) {
                         <br></br>
                         <span className="level-item">
                     <span className="icon is-small"><i className="fas fa-heart"></i></span>
+                    <span>${like_cnt}</span> 
                   </span>
                         <div className="level-right is-size-4">
                             ${date}
                         </div></div>`;
     $("#my-sam-list").append(tempHtml);
-}
