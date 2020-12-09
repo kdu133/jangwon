@@ -66,7 +66,7 @@ function Logout(){
         data: {},
         success: function (response) {
             if (response["result"] == "success") {
-;               alert('잘가시오')
+                ;               alert('잘가시오')
                 window.location.reload();
             } else {
                 alert('오류')

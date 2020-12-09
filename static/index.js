@@ -70,26 +70,30 @@ function makeSamCard(sam){
     let first = sam['first']
     let second = sam['second']
     let third = sam['third']
+    let user_id = sam['user_id']
     let like_count = sam['like_cnt']
-
+    let keyword = getKeyword(sam['date'])
     let card = `
                 <div class="card">
                     <div class="card-content">
                         <div class="sam-text">
                             <div>
-                                <p>코 : ${first}</p>
+                                <p>${keyword[0]} : ${first}</p>
                             </div>
                             <div>
-                                <p>로 : ${second}</p>
+                                <p>${keyword[1]} : ${second}</p>
                             </div>
                             <div>
-                                <p>나 : ${third}</p>
+                                <p>${keyword[2]} : ${third}</p>
                             </div>
                             <div class="content-edit">
                                <span class="icon is-medium pointer" onclick="deleteSam('${id}')">
                                    <i class="fas fa-lg fa-times"></i>
                                </span>
                            </div>
+                        </div>
+                        <div>
+                            <span> 작성자 : ${user_id}</span>
                         </div>
                         <div>
                             <span class="icon is-medium pointer" onclick="likeUp('${id}')">
@@ -113,7 +117,7 @@ function deleteSam(id) {
         },
         success: function (response) {
             if (response["result"] == "success") {
-                alert("삼행시 삭제!");
+                alert(response["message"]);
                 window.location.reload();
             } else {
                 alert("서버 오류!")
@@ -157,4 +161,43 @@ function showRank(){
             }
         }
     })
+}
+
+function getKeyword(date){
+    let keyword = ""
+    $.ajax({
+        type: "POST",
+        url: "/keyword/read",
+        async:false,
+        data: {
+            date_give: date
+        },
+        success: function (response) {
+            if (response["result"] == "success") {
+                console.log(response["keyword"]["keyword"])
+                keyword = response["keyword"]["keyword"]
+            } else {
+                console.log("단어 조회 실패!")
+            }
+        }
+    })
+    return keyword
+}
+
+
+function setKeyword(){
+    let keyword = getKeyword(getToday())
+    console.log(keyword)
+    $('#keyword-first').text(keyword[0] + " :")
+    $('#keyword-second').text(keyword[1] + " :")
+    $('#keyword-third').text(keyword[2] + " :")
+    $('#keyword').text(keyword)
+}
+
+function getToday(){
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = ("0" + (1 + date.getMonth())).slice(-2);
+    let day = ("0" + date.getDate()).slice(-2);
+    return year + month + day;
 }
