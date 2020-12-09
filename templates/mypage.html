@@ -4,22 +4,33 @@
 {% if session['id'] %}
 <script>
     $(document).ready(function () {
-        // $("#my-sam-list").html("");
-        showsams();
+        showMySams();
         Beloggedin();
     });
 </script>
 {% else %}
 <script>
     $(document).ready(function () {
-        // $("#my-sam-list").html("");
-        showsams();
-        Notlogin();
+        //    unauthorized.html 로 리다이렉트
     });
 </script>
 {% endif %}
 {% endblock %}
 
 {% block content %}
-<div id="my-sam-list"></div>
+<div class="main">
+    <div class="title">
+        <div class="container">
+            <h1 class="title has-text-black has-text-centered">
+                Mypage
+            </h1>
+            <p></p>
+            <h3 class="subtitle has-text-info has-text-centered">
+                자신의 삼행시를 보여줍니다.
+            </h3>
+            <div id="my-sam-list" class="column">
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

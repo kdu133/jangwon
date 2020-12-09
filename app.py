@@ -21,6 +21,10 @@ def home():
 def myPage():
     return render_template('mypage.html')
 
+@app.route('/unAuthorized')
+def unAuthorized():
+    return render_template('unAuthorized.html')
+
 # 삼행시 CRUD API
 @app.route('/sam/create', methods=['POST'])
 def create_sam():
