@@ -1,23 +1,22 @@
 {% extends 'layout.html' %}
 
 {% block pageload %}
-    <script>
-        $(document).ready(function(){
-            readSam();
-            showRank();
-        });
-    </script>
+<script>
+    $(document).ready(function(){
+        readSam();
+        showRank();
+    });
+</script>
 {% endblock %}
 
 
 {% block content %}
-
 <div class="card rank-box">
-    <div class="card-header">오늘의 장원</div>
+    <div class="card-header">금의환향</div>
     <div class="card-content">
-        <p>1등 : OOO</p>
-        <p>2등 : OOO</p>
-        <p>3등 : OOO</p>
+        <p> 장원 : <span id="rank-1"></span></p>
+        <p> 2등 : <span id="rank-2"></span></p>
+        <p> 3등 : <span id="rank-3"></span></p>
     </div>
 </div>
 
@@ -25,28 +24,31 @@
     <div class="card">
         <div class="card-content">
             <p class="title">
-                오늘의 키워드는 OOO 입니다!
+                오늘의 키워드는 "코로나" 입니다!
             </p>
         </div>
     </div>
-    <div id="sam-list">
+    <div class="sam-add-button">
+        <span class="icon is-large pointer" onclick="showSamAddCard()">
+            <i class="fas fa-plus-circle fa-3x"></i>
+        </span>
     </div>
     <div class="card" id="sam-add-card">
         <div class="card-content">
             <div class="field">
                 <div class="control">
-                    <span>O :</span>
+                    <span>코 :</span>
                     <input id="sam-first" class="input is-primary" type="text">
                 </div>
             </div>
             <div class="field">
                 <div class="control">
-                    <span>O :</span>
+                    <span>로 :</span>
                     <input id="sam-second" class="input is-primary" type="text">
                 </div>
             </div><div class="field">
             <div class="control">
-                <span>O :</span>
+                <span>나 :</span>
                 <input id="sam-third" class="input is-primary" type="text">
             </div>
         </div>
@@ -64,13 +66,8 @@
             </p>
         </div>
     </div>
-
-    <div class="sam-add-button">
-        <span class="icon is-large pointer" onclick="showSamAddCard()">
-            <i class="fas fa-plus-circle fa-3x"></i>
-        </span>
+    <div id="sam-list">
     </div>
 </div>
-
 
 {% endblock %}

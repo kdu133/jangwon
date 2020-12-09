@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block content %}
+
 <div id="my-sam-list">
     <div className="column">
         <div className="box notification is-danger">
@@ -37,52 +38,53 @@
             <span className="level-item">
                     <span className="icon is-small"><i className="fas fa-heart"></i></span>
                   </span>
-                        <div className="level-right is-size-4">
-                            ${date}
-                        </div></div>`;
-                $("#cards-box").append(tempHtml);
-
-            }
-        </script>
-
-    </head>
-
-    <body>
-        <div className="column">
-                    <div className="box notification is-danger">
-                  <span className="title1 has-text-info">
-                      <span>삼</span>
-                  </span>
-                        <span className="level1 is-size-5">
-                      <span>${first}</span>
-                  </span>
-                        <br></br>
-                        <span className="title2 has-text-info">
-                      <span>행</span>
-                  </span>
-                        <span className="level2 is-size-5">
-                      <span>${second}</span>
-                  </span>
-                        <br></br>
-                        <span className="title3 has-text-info">
-                      <span>시</span>
-                  </span>
-                        <span className="level3 is-size-5">
-                      <span>${third}</span>
-                  </span>
-                        <br></br>
-                        <span className="level-item">
-                    <span className="icon is-small"><i className="fas fa-heart"></i></span>
-                  </span>
-                        <div className="level-right is-size-4">
-                            ${date}
-                        </div></div>
-    </body>
-
-</html>
             <div className="level-right is-size-4">
                 ${date}
+            </div></div>`;
+        $("#cards-box").append(tempHtml);
+
+        }
+        </script>
+
+        </head>
+
+        <body>
+        <div className="column">
+            <div className="box notification is-danger">
+            <span className="title1 has-text-info">
+            <span>삼</span>
+            </span>
+            <span className="level1 is-size-5">
+            <span>${first}</span>
+            </span>
+            <br></br>
+            <span className="title2 has-text-info">
+            <span>행</span>
+            </span>
+            <span className="level2 is-size-5">
+            <span>${second}</span>
+            </span>
+            <br></br>
+            <span className="title3 has-text-info">
+            <span>시</span>
+            </span>
+            <span className="level3 is-size-5">
+            <span>${third}</span>
+            </span>
+            <br></br>
+            <span className="level-item">
+            <span className="icon is-small"><i className="fas fa-heart"></i></span>
+        </span>
+        <div className="level-right is-size-4">
+            ${date}
+            </div></div>
+        </body>
+
+        </html>
+        <div className="level-right is-size-4">
+            ${date}
             </div>
-        </div>
-    </div>
-    {% endblock %}
+            </div>
+            </div>
+        {% endblock %}
+

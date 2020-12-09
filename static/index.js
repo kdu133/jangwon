@@ -30,11 +30,10 @@ function createSam() {
             first_give: first,
             second_give: second,
             third_give: third,
-            user_id_give: "user_id"
         },
         success: function (response) {
             if (response["result"] == "success") {
-                alert("삼행시 추가!");
+                alert(response["message"]);
                 window.location.reload();
             } else {
                 alert("서버 오류!")
@@ -71,20 +70,20 @@ function makeSamCard(sam){
     let first = sam['first']
     let second = sam['second']
     let third = sam['third']
-    let like_count = sam['like'].length
+    let like_count = sam['like_cnt']
 
     let card = `
                 <div class="card">
                     <div class="card-content">
                         <div class="sam-text">
                             <div>
-                                <p>O : ${first}</p>
+                                <p>코 : ${first}</p>
                             </div>
                             <div>
-                                <p>O : ${second}</p>
+                                <p>로 : ${second}</p>
                             </div>
                             <div>
-                                <p>O : ${third}</p>
+                                <p>나 : ${third}</p>
                             </div>
                             <div class="content-edit">
                                <span class="icon is-medium pointer" onclick="deleteSam('${id}')">
@@ -93,7 +92,7 @@ function makeSamCard(sam){
                            </div>
                         </div>
                         <div>
-                            <span class="icon is-medium pointer">
+                            <span class="icon is-medium pointer" onclick="likeUp('${id}')">
                                 <i class="fas fa-lg fa-stamp"></i>
                             </span>
                             <p>${like_count}</p>
@@ -123,6 +122,24 @@ function deleteSam(id) {
     })
 }
 
+function likeUp(id){
+    $.ajax({
+        type: "POST",
+        url: "/sam/like",
+        data: {
+            id_give : id,
+        },
+        success: function (response) {
+            if (response["result"] == "success") {
+                alert(response["message"]);
+                window.location.reload();
+            } else {
+                alert("서버 오류!")
+            }
+        }
+    })
+}
+
 function showRank(){
     $.ajax({
         type: "GET",
@@ -131,12 +148,10 @@ function showRank(){
         },
         success: function (response) {
             if (response['result'] == 'success') {
-                let sams = response['sam_list']
-                for (let i = sams.length-1; i >= 0; i--) {
-                    let sam = sams[i]
-                    $('#sam-list').append(makeSamCard(sam))
-                }
-
+                let ranks = response['ranks']
+                $("#rank-1").text(ranks[0])
+                $("#rank-2").text(ranks[1])
+                $("#rank-3").text(ranks[2])
             } else {
                 alert("서버 오류!")
             }
