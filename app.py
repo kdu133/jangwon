@@ -57,6 +57,17 @@ def read_sam():
 
     return jsonify({'result': 'success', 'sam_list': sams})
 
+@app.route('/sam/myread', methods=['GET'])
+def myread_sam():
+    if 'id' not in session:
+        message = "입궐 먼저 하시오"
+    else:
+        user_id = session['id']
+        mysams = list(db.sam.find({'user_id':user_id}).sort("date", DESCENDING))
+        for mysam in mysams:
+            mysam['_id'] = str(mysam['_id'])
+        return jsonify({'result': 'success', 'mysam_list': mysams})
+
 @app.route('/sam/delete', methods=['POST'])
 def delete_sam():
     id_receive = request.form['id_give']
