@@ -57,7 +57,9 @@ def delete_sam():
 @app.route('/rank/read', methods=['GET'])
 def read_rank():
     today = datetime.today().strftime("%Y%m%d")
-    # ranks = list(db.sam.find({'date': today}).sort({''}))
+    ranks = list(db.sam.find({'date': today}))
+    print(ranks)
+    print(sorted(ranks, key=lambda x: -len(x['like'])))
     return jsonify({'result': 'success'})
 
 @app.route('/user/create', methods=['POST'])
