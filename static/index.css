@@ -1,10 +1,45 @@
-.rank-box{
-    width: 180px;
-    height: 150px;
+.sam-header{
     position: fixed;
-    right: 0;
-    top: 20%;
-    transform: translate(-50%, -50%);
+    transform: translate(0%, -125%);
+    z-index: 2;
+    width: 80%;
+}
+
+.keyword-card{
+    height: 6rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.keyword-card .card-content{
+    height: 100%;
+    padding: 0.5rem
+}
+
+.keyword-box{
+    width: 85%;
+    height: 100%;
+    float: left;
+    text-align: center;
+    margin: auto;
+    transform: translate(0%, 18%);
+}
+
+.keyword-box .title{
+    font-size: 3rem;
+}
+
+.rank-box{
+    width: 15%;
+    float: right;
+    font-size: larger;
+}
+
+.sam-add-button{
+    position: fixed;
+    left: 95%;
+    top: 92%;
+    transform: translate(-50%, 0%);
     z-index: 2;
 }
 
@@ -13,17 +48,22 @@
     margin: auto;
 }
 
+#sam-list{
+    margin-top: 7rem;
+}
+
 .sam-text{
     float:left;
+    font-size: x-large;
     width: 80%;
 }
 
-#sam-add-card{
-    display: none;
+#sam-add-card .control{
+    font-size: xx-large;
 }
 
 #sam-add-card input{
-    width: 40%;
+    width: 90%;
 }
 
 .sam-add-button{
@@ -34,7 +74,17 @@
     display: none;
 }
 
-
+.layer-popup{
+    display: none;
+    position: fixed;
+    width: 80%;
+    heigth: 15rem;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%, 0%);
+    z-index: 2;
+    margin-bottom: 0rem;
+}
 
 
 /* wrapper */
@@ -51,7 +101,6 @@ header{
     width: 100%;
     z-index: 1;
     background-color: #fff;
-    /*임시*/
     border: solid 1px;
 }
 
@@ -94,18 +143,6 @@ main{
 .main-image{
     margin: 0rem auto;
     width: 70%;
-}
-
-.layer-popup{
-    display: none;
-    position: fixed;
-    height: 21rem;
-    width: 30em;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    margin-bottom: 0rem;
 }
 
 .content-add{
