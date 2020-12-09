@@ -5,6 +5,14 @@ function OpenPop(){
 function CreateAccount(){
     let createId = $("#idValue").val();
     let createPw = $("#pwValue").val();
+    if (createId == '') {
+        alert('가문을 밝히시오');
+        return;
+    }
+    if (createPw == '') {
+        alert('문호를 증명하시오');
+        return;
+    }
 
     $.ajax({
         type: "POST",
@@ -24,6 +32,14 @@ function CreateAccount(){
 function Login(){
     let user_id = $("#idValue").val();
     let user_pw = $("#pwValue").val();
+    if (user_id == '') {
+        alert('가문을 밝히시오');
+        return;
+    }
+    if (user_pw == '') {
+        alert('문호를 증명하시오');
+        return;
+    }
 
     $.ajax({
         type: "POST",
