@@ -4,6 +4,7 @@ import bcrypt
 from datetime import datetime
 import time
 from bson.objectid import ObjectId
+import random
 
 client = MongoClient('localhost', 27017)
 # client = MongoClient('mongodb://test:test@localhost', 27017)
@@ -19,6 +20,10 @@ def home():
 @app.route('/myPage')
 def myPage():
     return render_template('mypage.html')
+
+@app.route('/unAuthorized')
+def unAuthorized():
+    return render_template('unAuthorized.html')
 
 # 삼행시 CRUD API
 @app.route('/sam/create', methods=['POST'])
@@ -57,11 +62,32 @@ def read_sam():
 
     return jsonify({'result': 'success', 'sam_list': sams})
 
+@app.route('/sam/myread', methods=['GET'])
+def myread_sam():
+    if 'id' not in session:
+        message = "입궐 먼저 하시오"
+    else:
+        user_id = session['id']
+        mysams = list(db.sam.find({'user_id':user_id}).sort("date", DESCENDING))
+        for mysam in mysams:
+            mysam['_id'] = str(mysam['_id'])
+        return jsonify({'result': 'success', 'mysam_list': mysams})
+
 @app.route('/sam/delete', methods=['POST'])
 def delete_sam():
-    id_receive = request.form['id_give']
-    db.sam.delete_one({'_id': ObjectId(id_receive)})
-    return jsonify({'result': 'success'})
+    if 'id' not in session:
+        message = "입궐 먼저 하시오"
+    else:
+        user_id = session['id']
+        id_receive = request.form['id_give']
+        sam = db.sam.find_one({'_id': ObjectId(id_receive)})
+        if user_id != sam['user_id']:
+            message = "당신 것이 아니잖소"
+        else:
+            message = "삭제되었소"
+            db.sam.delete_one({'_id': ObjectId(id_receive)})
+
+    return jsonify({'result': 'success', 'message':message})
 
 @app.route('/sam/like', methods=['POST'])
 def like_sam():
@@ -134,6 +160,22 @@ def user_only():
     else:
         id = '없음'
     return jsonify({'result': 'success', 'id': id})
+
+
+@app.route('/keyword/read', methods=['POST'])
+def get_keyword():
+    date_receive = request.form['date_give']
+    keyword = db.keywords.find_one({'date': date_receive},{'_id':False})
+    if keyword is None:
+        keyword = {'date': date_receive, 'keyword': generateKeyword()}
+        db.keywords.insert_one(keyword)
+        keyword = db.keywords.find_one({'date': date_receive}, {'_id': False})
+    return jsonify({'result': 'success', 'keyword': keyword})
+
+def generateKeyword():
+    words = ['나무꾼', '나침반', '나이스', '나침반', '내용물', '냉장고']
+    return random.choice(words)
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

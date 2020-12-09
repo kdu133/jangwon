@@ -21,25 +21,6 @@ function CreateAccount(){
     })
 }
 
-function CreateAccount(){
-    let createId = $("#idValue").val();
-    let createPw = $("#pwValue").val();
-
-    $.ajax({
-        type: "POST",
-        url: "/user/create",
-        data: {id_give: createId, pw_give: createPw},
-        success: function (response) {
-            if (response["result"] == "success") {
-                alert('입궐하셔도 좋소')
-                window.location.reload();
-            } else {
-                alert('문벌을 사칭하지마시오')
-            }
-        }
-    })
-}
-
 function Login(){
     let user_id = $("#idValue").val();
     let user_pw = $("#pwValue").val();
@@ -66,7 +47,7 @@ function Logout(){
         data: {},
         success: function (response) {
             if (response["result"] == "success") {
-;               alert('잘가시오')
+                alert('잘가시오')
                 location.href='/';
             } else {
                 alert('오류')
