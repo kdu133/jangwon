@@ -6,8 +6,9 @@ import time
 from bson.objectid import ObjectId
 import random
 
-client = MongoClient('localhost', 27017)
-# client = MongoClient('mongodb://test:test@localhost', 27017)
+# client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://beginnery:dudgnfud@13.209.16.125', 27017)
+
 db = client.jangwon
 app = Flask(__name__)
 app.secret_key = "secretsecret"

@@ -154,6 +154,7 @@ function showRank(){
         success: function (response) {
             if (response['result'] == 'success') {
                 let ranks = response['ranks']
+                $("#rank-0").text(ranks[0])
                 $("#rank-1").text(ranks[0])
                 $("#rank-2").text(ranks[1])
                 $("#rank-3").text(ranks[2])
