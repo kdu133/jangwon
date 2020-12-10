@@ -32,19 +32,20 @@
     <style>
         .uplayout {
             width : 98%;
-            height : 50px;
-            border : solid 2px;
+            height : 70px;
+            border : solid 2px lightslategrey;
             border-radius : 10px;
-            padding : 0px 5px;
+            padding : 0px 0 0 43%;
             margin : 1%;
             z-index: 1;
+            background-image:url(../static/back.png);
         }
         .belowlayout {
             width : 98%;
             height : 120px;
-            border-top: solid 2px;
-            border-left : solid 2px;
-            border-right: solid 2px;
+            border-top: solid 2px lightslategrey;
+            border-left : solid 2px lightslategrey;
+            border-right: solid 2px lightslategrey;
             background-color : #2E3D59;
             border-top-left-radius : 10px;
             border-top-right-radius: 10px;
@@ -61,7 +62,7 @@
         .dropdown-content  {
             display: none;
             float : left;
-            background-color: #2E3D59;
+            background-color: #F5D89B;
             padding: 3px 8px 0 8px;
             margin : 0 3px;
             height : 30px;
@@ -69,8 +70,9 @@
             transition: 0.4s;
         }
 
-        p { color : #43D9BD; }
+        p { color : black;}
         h1 { font-size: 30px; font-family: 'Yeon Sung', sursive;}
+        h2 { font-size: 50px; font-family: 'Yeon Sung', sursive;}
 
         .dropdown:hover .dropdown-content {
             display : block;
@@ -155,10 +157,10 @@
                     if (response["result"] == "success") {
                         let loginId = response["id"]
                         let loginhtml = `
-            <i onclick="Logout()" id="logout" class="fas fa-door-open fa-2x pointer" style="margin : 8px 0 0 0; float: right"></i>
+            <i onclick="Logout()" id="logout" class="fas fa-door-open fa-2x pointer" style="position:fixed; right:2.2%; bottom : 9%; z-index:3"></i>
                     <div class="dropdown" style="float : right; margin : 8px 8px 0 0">
-            <i class="fas fa-scroll fa-2x pointer" onclick="location.href='myPage'"></i>
-            <div class="dropdown-content">
+            <i class="fas fa-scroll fa-2x pointer" style="position:fixed; right:2.2%; bottom : 14%; z-index:3" onclick="location.href='myPage'"></i>
+            <div class="dropdown-content" style="position:fixed; right:90px; bottom : 14%; z-index:3">
                 <p>${loginId}의 시권(試券)</p>
             </div>
         </div>`
@@ -175,25 +177,32 @@
     </script>
 </head>
 <body>
-<div style="width : 100%; height:70px; background-color: white; position: fixed; z-index: 1;">
-    <div class="uplayout">
-        <div><i class="fas fa-caret-right fa-2x" style="float : left; margin : 8px 8px 0 0"></i></div>
+<div style="width : 25em; height:8em; position: fixed; margin-left: -12.5em; left:50%; top: 14px; z-index: 1; background-image: url(../static/scscroll.png); background-size: cover; padding: 2em 0 0 8em">
+    <div id="jangwonhome">
         <div style="display : inline; float : left">
-            <h1 class="pointer" onclick="location.href='/'">장원급제</h1>
+            <h2 style="" class="pointer" onclick="location.href='/'">장원급제</h2>
         </div>
-        <div id="iflogin">
+        <div style="display : inline; width : 3.5em; height : 5em; transform:translate(-7px, -15px); background-image:url(../static/write.png); float : left; background-size : cover; "></div>
+    </div>
+    <div id="jangwon" style="transform: translate(-15%, 0)">
+        <div style="float : left">
+            <h2 style="" class="pointer" onclick="location.href='/'">장원 : <span id="rank-1"></span></h2>
         </div>
-        <div id="logbtn" class="dropdown" style="dispaly : none; float : right; margin : 8px 10px 0 0">
-            <i class="fas fa-user-circle fa-2x" onclick="OpenPop()"></i>
-            <div class="dropdown-content">
-                <p>과거보러 오셨소?</p>
-            </div>
-        </div>
+        <div style="display : inline; width : 3.5em; height : 5em; transform:translate(-7px, -15px); background-image:url(../static/write.png); float : left; background-size : cover; "></div>
     </div>
 </div>
-<div style="height: 90px"></div>
+<div id="iflogin">
+</div>
+<div id="logbtn" class="dropdown" style="display : none; position:fixed; right:2%; bottom : 8%; z-index:3">
+    <i class="fas fa-user-circle fa-3x" onclick="OpenPop()"></i>
+    <div class="dropdown-content" style="z-index: 3">
+        <p>과거보러 오셨소?</p>
+    </div>
+</div>
+
+
 {% block content %}{% endblock %}
-<div id="PopUp" style="background-image: url(../static/duru.png); background-size: cover;">
+<div id="PopUp" style="background-image: url(../static/duru.png); background-size: cover; z-index: 3">
     <div style="width: 28em; height: 4em">
         <div style="width : 4em; height: 3em; display: block; float: left; padding: 0.3em 0 0.3em 1em; font-family: 'Yeon Sung', sursive; font-size : 1.3em">문벌</div>
         <div style="width : 18em; height: 3em; display: block; float: left">
@@ -207,24 +216,21 @@
         </div>
     </div>
     <div style="width: 23em; padding-left: 1.5em; height: 4em;">
-        <div id="goLogin" style="width : 7em; display: block; float: left; text-align: center; border : 2px solid" onclick="Login()">입궐(入闕)</div>
+        <div id="goLogin" style="width : 7em; display: block; float: left; text-align: center;" onclick="Login()">입궐(入闕)</div>
         <div id="goSet" style="width : 7em; display: block; float: left; text-align: center" onclick="CreateAccount()"> 서경(署經) </div>
     </div>
     <div id="pozol" style="z-index: 1;"></div>
     <div id="justSee" style="position: relative; top: -20em; left : 70%;  width : 7em; display: block; z-index: 3; float: left; text-align: center" onclick="Popdown()">
         방관(傍觀) </div>
     <div id="chat" style="display: none">
-        <h1 id="wannalogin" style="display: none; position:relative; left : -2.5em;">들어오시겠소?</h1>
-        <h1 id="wannaSet" style="display: none; position:relative; left : -2em;">처음이시오?</h1>
-        <h1 id="wannaSee" style="display: none; position:relative; left : -3em;">돌아가시겠소?</h1>
+        <h1 id="wannalogin" style="display: none; position:relative; left : -2em; top:-2px">들어오시겠소?</h1>
+        <h1 id="wannaSet" style="display: none; position:relative; left : -1.5em; top:-2px;">처음이시오?</h1>
+        <h1 id="wannaSee" style="display: none; position:relative; left : -2em; top:-2px;">돌아가시겠소?</h1>
     </div>
 </div>
-
-<br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br>
-<div class="belowlayout">
-    <p> 저작권 : 무른모 사관학교 '밀림' 여덟번째 조 </p>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="belowlayout" style="background-image:url(../static/back.png)">
+    <p style="font-size: 1em; color: black"> Copyright ⓒ SW JUNGLE 1rd-0week-8team All rights reserved </p>
 </div>
 </body>
 </html>

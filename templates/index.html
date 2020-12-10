@@ -8,6 +8,15 @@
         showRank();
         setKeyword();
         Beloggedin();
+        $('#jangwon').hide();
+        $('#jangwonhome').hover(function() {
+            $('#jangwonhome').hide();
+            $('#jangwon').show();
+        }, function() {
+            $('#jangwon').hide();
+            $('#jangwonhome').show();
+        })
+
     });
 </script>
 {% else %}
@@ -17,6 +26,15 @@
         showRank();
         setKeyword();
         Notlogin();
+        $('#jangwon').hide();
+        $('#jangwonhome').hover(function() {
+            $('#jangwonhome').hide();
+            $('#jangwon').show();
+        }, function() {
+            $('#jangwon').hide();
+            $('#jangwonhome').show();
+        })
+
         $('#goLogin').hover(function() {
             $('#chat').show();
             $('#wannalogin').show();
@@ -48,50 +66,39 @@
 
 
 {% block content %}
+<div style="height:7em; left:50%; top: 120px; z-index: 1; padding: 2em 0em;">
+    <h2 style="position: relative; left:50%; top:120px; margin-left:-5em; font-size: 45px; float:left">금일 시제(試題)는 "<span id="keyword"></span>"!</h2>
 
+</div>
 
 <div class="sam-column">
-    <div class="sam-header">
-        <div class="card keyword-card">
-            <div class="card-content">
-                <div class="keyword-box">
-                    <span class="title"> 금일 시제(試題)는 "<span id="keyword"></span>"!</span>
-                </div>
-                <div class="rank-box">
-                    <p> 장원 : <span id="rank-1"></span></p>
-                    <p> 급제 : <span id="rank-2"></span></p>
-                    <p> 급제 : <span id="rank-3"></span></p>
-                </div>
-            </div>
-        </div>
-    </div>
     <span class="icon is-large pointer sam-add-button" onclick="showSamAddCard()">
-            <i class="fas fa-plus-circle fa-3x"></i>
+            <i class="fas fa-paint-brush fa-3x"></i>
     </span>
-    <div class="card layer-popup" id="sam-add-card">
-        <div class="card-content">
+    <div class="card layer-popup" id="sam-add-card" style="z-index: 2;">
+        <div class="card-content" style="background-color: rgba(0, 0, 0, 0)">
             <div class="field">
                 <div class="control">
                     <span id="keyword-first"></span>
-                    <input id="sam-first" class="input is-primary" type="text">
+                    <input id="sam-first" class="input is-primary" type="text" style="border-color: lightslategrey">
                 </div>
             </div>
             <div class="field">
                 <div class="control">
                     <span id="keyword-second"></span>
-                    <input id="sam-second" class="input is-primary" type="text">
+                    <input id="sam-second" class="input is-primary" type="text" style="border-color: lightslategrey">
                 </div>
             </div><div class="field">
             <div class="control">
                 <span id="keyword-third"></span>
-                <input id="sam-third" class="input is-primary" type="text">
+                <input id="sam-third" class="input is-primary" type="text" style="border-color: lightslategrey">
             </div>
         </div>
         </div>
         <div class="field is-grouped is-grouped-right">
             <p class="control">
-                <a class="button is-primary" onclick="createSam()">
-                    만들기
+                <a class="button is-primary" onclick="createSam()" style="background-color: #F5D89B">
+                    제출
                 </a>
             </p>
             <p class="control">
