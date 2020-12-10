@@ -77,10 +77,14 @@
     width: 80%;
     heigth: 15rem;
     left: 50%;
-    top: 70%;
-    transform: translate(-50%, 0%);
+    bottom : 2%;
+    transform: translate(-50%, 0);
     z-index: 2;
     margin-bottom: 0rem;
+}
+
+.fa-stamp:hover{
+    color : #bd0c0c;
 }
 
 

@@ -104,10 +104,10 @@
 
         #chat{
             position : relative;
-            width : 17em;
+            width : 16em;
             height : 2.2em;
             display : none;
-            top: -16em; left : 0%;
+            top: -16em; left : 2%;
             background-image: url("../static/chat.png");
             background-size: cover;
         }
@@ -177,19 +177,19 @@
         }
     </script>
 </head>
-<body>
+<body style="background-color: #f4e3cf96">
 <div style="width : 25em; height:8em; position: fixed; margin-left: -12.5em; left:50%; top: 14px; z-index: 1; background-image: url(../static/scscroll.png); background-size: cover; padding: 2em 0 0 8em">
     <div id="jangwonhome">
         <div style="display : inline; float : left">
-            <h2 style="" class="pointer" onclick="location.href='/'">장원급제</h2>
+            <h2 class="pointer" onclick="location.href='/'">장원급제</h2>
         </div>
         <div style="display : inline; width : 3.5em; height : 5em; transform:translate(-7px, -15px); background-image:url(../static/write.png); float : left; background-size : cover; "></div>
     </div>
-    <div id="jangwon" style="transform: translate(-15%, 0)">
+    <div id="jangwon" style="display: none; transform: translate(-17%, 0)">
         <div style="float : left">
-            <h2 style="" class="pointer" onclick="location.href='/'">장원 : <span id="rank-0"></span></h2>
+            <h2 class="pointer" onclick="location.href='/'">장원 : <span id="rank-0"></span></h2>
         </div>
-        <div style="display : inline; width : 3.5em; height : 5em; transform:translate(-7px, -15px); background-image:url(../static/write.png); float : left; background-size : cover; "></div>
+        <div style="width : 3.5em; height : 5em; transform:translate(13.5em, -1em); background-image:url(../static/write.png); position: relative; background-size : cover; "></div>
     </div>
 </div>
 <div id="iflogin">
@@ -245,7 +245,7 @@
     <div style="width: 28em; height: 4em">
         <div style="width : 4em; height: 3em; display: block; float: left; padding: 0.3em 0 0.3em 1em; font-family: 'Yeon Sung', sursive; font-size : 1.3em">문벌</div>
         <div style="width : 18em; height: 3em; display: block; float: left">
-            <input style="width : 100%; height: 100%" placeholder="어디 집안이오" id="idValue">
+            <input style="width : 100%; height: 100%" placeholder="3글자 이내의 문벌을 대시오" id="idValue">
         </div>
     </div>
     <div style="width: 28em; height: 5em">
