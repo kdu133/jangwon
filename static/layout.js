@@ -9,6 +9,11 @@ function CreateAccount(){
         alert('가문을 밝히시오');
         return;
     }
+    if (createId.length > 3) {
+        alert('문벌은 3자 이내로 하시오');
+        return;
+    }
+    
     if (createPw == '') {
         alert('문호를 증명하시오');
         return;
