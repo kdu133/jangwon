@@ -23,6 +23,9 @@
     <script src="{{ url_for('static', filename='index.js') }}"></script>
     <script src="{{ url_for('static', filename='mypage.js') }}"></script>
 
+    <!-- 파비콘 -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+
     <title>장원급제</title>
 
     {% block pageload %}{% endblock %}
