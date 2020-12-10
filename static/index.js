@@ -75,8 +75,8 @@ function makeSamCard(sam){
     let like_count = sam['like_cnt']
     let keyword = getKeyword(sam['date'])
     let card = `
-                <div class="card">
-                    <div class="card-content">
+                <div class="card" style="background-image:url(../static/back.png); padding: 3px; margin-bottom: 4px;" >
+                    <div class="card-content" style="padding : 10px 20px">
                         <div class="sam-text">
                             <div>
                                 <p>${keyword[0]} : ${first}</p>
@@ -94,13 +94,13 @@ function makeSamCard(sam){
                            </div>
                         </div>
                         <div>
-                            <span> 작성자 : ${user_id}</span>
+                            <span style="font-size: 24px"> 작성자 : ${user_id}</span>
                         </div>
                         <div>
                             <span class="icon is-medium pointer" onclick="likeUp('${id}')">
-                                <i class="fas fa-lg fa-stamp"></i>
+                                <i class="fas fa-lg fa-stamp fa-2x"></i>
                             </span>
-                            <p>${like_count}</p>
+                            <span style="font-size: 2em">&nbsp ${like_count}</span>
                         </div>
                     </div>
                 </div>

@@ -36,10 +36,7 @@
 }
 
 .sam-add-button{
-    position: fixed;
-    left: 95%;
-    top: 92%;
-    transform: translate(-50%, 0%);
+    position:fixed; right:2%; bottom : 2%;;
     z-index: 2;
 }
 
@@ -49,7 +46,7 @@
 }
 
 #sam-list{
-    margin-top: 7rem;
+    margin-top: 130px;
 }
 
 .sam-text{
