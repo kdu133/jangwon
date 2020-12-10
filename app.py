@@ -49,7 +49,7 @@ def create_sam():
                    }
 
             db.sam.insert_one(sam)
-            message = "삼행시 추가!"
+            message = "제출 되었소"
 
     return jsonify({'result': 'success', 'message':message})
 
@@ -100,7 +100,7 @@ def like_sam():
         sam = db.sam.find_one({'_id': ObjectId(id_receive)})
         print(user_id, sam)
         if user_id in sam['like_list']:
-            message = "좋아요 취소"
+            message = "평가를 번복하겠소"
             like_status = "likeDown"
             like_list = sam['like_list']
             like_list.remove(user_id)
@@ -108,7 +108,7 @@ def like_sam():
                               {'$set': {'like_list': like_list,
                                         'like_cnt': sam['like_cnt'] - 1}})
         else:
-            message = "좋아요"
+            message = "평가를 반영하겠소"
             like_status = "likeUp"
             like_list = sam['like_list']
             like_list.append(user_id)
