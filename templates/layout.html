@@ -23,6 +23,9 @@
     <script src="{{ url_for('static', filename='index.js') }}"></script>
     <script src="{{ url_for('static', filename='mypage.js') }}"></script>
 
+    <!-- 파비콘 -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+
     <title>장원급제</title>
 
     {% block pageload %}{% endblock %}
@@ -200,6 +203,44 @@
 
 
 {% block content %}{% endblock %}
+<div class="sam-column">
+    <span class="icon is-large pointer sam-add-button" onclick="showSamAddCard()">
+            <i class="fas fa-paint-brush fa-3x"></i>
+    </span>
+    <div class="card layer-popup" id="sam-add-card" style="z-index: 2;">
+        <div class="card-content" style="background-color: rgba(0, 0, 0, 0)">
+            <div class="field">
+                <div class="control">
+                    <span id="keyword-first"></span>
+                    <input id="sam-first" class="input is-primary" type="text" style="border-color: lightslategrey">
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <span id="keyword-second"></span>
+                    <input id="sam-second" class="input is-primary" type="text" style="border-color: lightslategrey">
+                </div>
+            </div><div class="field">
+            <div class="control">
+                <span id="keyword-third"></span>
+                <input id="sam-third" class="input is-primary" type="text" style="border-color: lightslategrey">
+            </div>
+        </div>
+        </div>
+        <div class="field is-grouped is-grouped-right">
+            <p class="control">
+                <a class="button is-primary" onclick="createSam()" style="background-color: #F5D89B">
+                    제출
+                </a>
+            </p>
+            <p class="control">
+                <a href="#" class="button is-light" onclick="hideSamAddCard()">
+                    취소
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
 <div id="PopUp" style="background-image: url(../static/duru.png); background-size: cover; z-index: 3">
     <div style="width: 28em; height: 4em">
         <div style="width : 4em; height: 3em; display: block; float: left; padding: 0.3em 0 0.3em 1em; font-family: 'Yeon Sung', sursive; font-size : 1.3em">문벌</div>
@@ -214,11 +255,11 @@
         </div>
     </div>
     <div style="width: 23em; padding-left: 1.5em; height: 4em;">
-        <div id="goLogin" style="width : 7em; display: block; float: left; text-align: center;" onclick="Login()">입궐(入闕)</div>
-        <div id="goSet" style="width : 7em; display: block; float: left; text-align: center" onclick="CreateAccount()"> 서경(署經) </div>
+        <div id="goLogin" class="pointer" style="width : 7em; display: block; float: left; text-align: center;" onclick="Login()">입궐(入闕)</div>
+        <div id="goSet" class="pointer" style="width : 7em; display: block; float: left; text-align: center" onclick="CreateAccount()"> 서경(署經) </div>
     </div>
     <div id="pozol" style="z-index: 1;"></div>
-    <div id="justSee" style="position: relative; top: -20em; left : 70%;  width : 7em; display: block; z-index: 3; float: left; text-align: center" onclick="Popdown()">
+    <div id="justSee" class="pointer" style="position: relative; top: -20em; left : 70%;  width : 7em; display: block; z-index: 3; float: left; text-align: center" onclick="Popdown()">
         방관(傍觀) </div>
     <div id="chat" style="display: none">
         <h1 id="wannalogin" style="display: none; position:relative; left : -2em; top:-2px">들어오시겠소?</h1>

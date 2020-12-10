@@ -5,8 +5,43 @@
 <script>
     $(document).ready(function () {
         showMySams();
+        showRank();
         Beloggedin();
+        setKeyword();
         $('#jangwon').hide();
+                $('#jangwon').hide();
+        $('#jangwonhome').hover(function() {
+            $('#jangwonhome').hide();
+            $('#jangwon').show();
+        }, function() {
+            $('#jangwon').hide();
+            $('#jangwonhome').show();
+        })
+
+        $('#goLogin').hover(function() {
+            $('#chat').show();
+            $('#wannalogin').show();
+        }, function() {
+            $('#chat').hide();
+            $('#wannalogin').hide();
+        })
+
+        $('#goSet').hover(function() {
+            $('#chat').show();
+            $('#wannaSet').show();
+        }, function() {
+            $('#chat').hide();
+            $('#wannaSet').hide();
+        })
+
+
+        $('#justSee').hover(function() {
+            $('#chat').show();
+            $('#wannaSee').show();
+        }, function() {
+            $('#chat').hide();
+            $('#wannaSee').hide();
+        })
     });
 </script>
 {% else %}
@@ -36,8 +71,5 @@
         </div>
     </div>
 </div>
-    <span class="icon is-large pointer sam-add-button" onclick="location.href='/'">
-            <i class="fas fa-paint-brush fa-3x"></i>
-    </span>
 
 {% endblock %}
